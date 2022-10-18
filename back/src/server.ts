@@ -1,16 +1,18 @@
 console.log("About to start a server...");
 
-const express = require("express");
-const serveIndex = require("serve-index");
+import express, { NextFunction, Request, Response } from "express";
+import serveIndex from "serve-index";
 
 const app = express();
 const port = 3000;
 const wwwDir = ".";
 
-app.use((req, res, next) => {
+const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
   console.log("req: ", req.url);
   next();
-});
+}
+
+app.use(logMiddleware);
 
 app.get("/api/date", (req, res) => {
   res.json({ date: new Date() });
