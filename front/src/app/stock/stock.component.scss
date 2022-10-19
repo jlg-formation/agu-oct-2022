@@ -1,0 +1,38 @@
+div.content {
+  display: flex;
+  flex-flow: column;
+  gap: 1em;
+}
+
+nav {
+  display: flex;
+  gap: 0.5em;
+}
+
+table {
+  border: 0.1em solid #bbb;
+
+  td,
+  th {
+    padding: 0.5em 1em;
+  }
+
+  thead {
+    background-color: #bbb;
+  }
+
+  tbody {
+    cursor: pointer;
+    tr:nth-child(even) {
+      background-color: #eee;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    tr.selected {
+      background-color: #ccc;
+    }
+  }
+}
