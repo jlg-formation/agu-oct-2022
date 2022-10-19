@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/normalize.css/normalize.css";
+@import "./scss/button.scss";
 
 body {
   font-family: sans-serif;
+}
+
+main {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
