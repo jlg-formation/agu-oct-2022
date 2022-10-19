@@ -5,7 +5,7 @@ import serveIndex from "serve-index";
 
 const app = express();
 const port = 3000;
-const wwwDir = ".";
+const wwwDir = "../front/dist/front";
 
 const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
   console.log("req: ", req.url);
