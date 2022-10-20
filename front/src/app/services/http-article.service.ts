@@ -16,6 +16,10 @@ export class HttpArticleService extends ArticleService {
 
   override async refresh(): Promise<void> {
     await super.refresh();
-    this.http.get(url);
+    this.http.get(url).subscribe({
+      error: (err) => {
+        console.log('err: ', err);
+      },
+    });
   }
 }
