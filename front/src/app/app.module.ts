@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,7 +12,7 @@ import { HttpArticleService } from './services/http-article.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LegalComponent],
-  imports: [BrowserModule, AppRoutingModule, LayoutModule],
+  imports: [BrowserModule, AppRoutingModule, LayoutModule, HttpClientModule],
   providers: [{ provide: ArticleService, useClass: HttpArticleService }],
   bootstrap: [AppComponent],
 })
