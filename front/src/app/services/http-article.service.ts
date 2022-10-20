@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArticleService } from './article.service';
 
-const url = 'http://localhost:3000/api/articles';
+const url = '/api/articles';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,9 @@ export class HttpArticleService extends ArticleService {
     this.http.get(url).subscribe({
       error: (err) => {
         console.log('err: ', err);
+      },
+      next: (data) => {
+        console.log('data: ', data);
       },
     });
   }

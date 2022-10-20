@@ -72,7 +72,8 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "port": 4202
+            "port": 4202,
+            "proxyConfig": "src/proxy.conf.json"
           }
         },
         "extract-i18n": {
