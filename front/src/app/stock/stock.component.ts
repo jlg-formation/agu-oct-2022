@@ -12,4 +12,9 @@ export class StockComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  refresh() {
+    console.log('refresh');
+    this.articleService.refresh();
+  }
 }
