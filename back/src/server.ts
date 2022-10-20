@@ -31,6 +31,14 @@ app.get("/api/articles", (req, res) => {
   res.json(articles);
 });
 
+app.use("/api", express.json());
+
+app.post("/api/articles", (req, res) => {
+  const article: Article = req.body;
+  articles.push(article);
+  res.status(204).end();
+});
+
 app.use(express.static(wwwDir));
 app.use(serveIndex(wwwDir, { icons: true }));
 

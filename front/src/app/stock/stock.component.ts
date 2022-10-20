@@ -20,6 +20,7 @@ export class StockComponent implements OnInit {
 
   constructor(public articleService: ArticleService) {
     console.log('articleService: ', articleService);
+    this.refresh();
   }
 
   ngOnInit(): void {}
