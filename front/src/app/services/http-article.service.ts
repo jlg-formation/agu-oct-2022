@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Article } from '../interfaces/article';
 import { ArticleService } from './article.service';
 
 const url = '/api/articles';
@@ -16,12 +17,14 @@ export class HttpArticleService extends ArticleService {
 
   override async refresh(): Promise<void> {
     await super.refresh();
-    this.http.get(url).subscribe({
+    this.http.get<Article[]>(url).subscribe({
       error: (err) => {
         console.log('err: ', err);
       },
-      next: (data) => {
-        console.log('data: ', data);
+      next: (articles) => {
+        console.log('articles: ', articles);
+        this.articles = articles;
+        this.save();
       },
     });
   }
