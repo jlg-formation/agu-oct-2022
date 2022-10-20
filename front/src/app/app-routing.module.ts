@@ -6,20 +6,25 @@ import { LegalComponent } from './routes/legal/legal.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'legal',
-    component: LegalComponent
+    component: LegalComponent,
   },
-  { path: 'stock', loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
-
+  {
+    path: 'stock',
+    loadChildren: () =>
+      import('./stock/stock.module').then((m) => m.StockModule),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
