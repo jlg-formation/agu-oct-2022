@@ -28,4 +28,17 @@ export class HttpArticleService extends ArticleService {
     await super.add(a);
     await lastValueFrom(this.http.post<void>(url, a));
   }
+
+  override async remove(selectedArticles: Set<Article>): Promise<void> {
+    await super.remove(selectedArticles);
+    const ids = [...selectedArticles].map((a) => a.id);
+    await lastValueFrom(
+      this.http.delete<void>(url, {
+        body: ids,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    );
+  }
 }

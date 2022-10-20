@@ -9,9 +9,13 @@ const app = express();
 const port = 3000;
 const wwwDir = "../front/dist/front";
 
-const articles: Article[] = [
-  { name: "Tournevis", price: 2.56, qty: 10 },
-  { name: "Marteau", price: 5, qty: 56 },
+const generateId = () => {
+  return Date.now() + "";
+};
+
+let articles: Article[] = [
+  { id: "a1", name: "Tournevis", price: 2.56, qty: 10 },
+  { id: "a2", name: "Marteau", price: 5, qty: 56 },
 ];
 
 const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -35,7 +39,14 @@ app.use("/api", express.json());
 
 app.post("/api/articles", (req, res) => {
   const article: Article = req.body;
+  article.id = generateId();
   articles.push(article);
+  res.status(204).end();
+});
+
+app.delete("/api/articles", (req, res) => {
+  const ids: string[] = req.body;
+  articles = articles.filter((a) => !ids.includes(a.id));
   res.status(204).end();
 });
 
