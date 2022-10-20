@@ -24,14 +24,14 @@ export class StockComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  refresh() {
+  async refresh() {
     console.log('refresh');
-    this.articleService.refresh();
+    await this.articleService.refresh();
   }
 
-  remove() {
+  async remove() {
     console.log('remove');
-    this.articleService.remove(this.selectedArticles);
+    await this.articleService.remove(this.selectedArticles);
     this.selectedArticles.clear();
   }
 

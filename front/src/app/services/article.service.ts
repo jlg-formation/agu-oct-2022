@@ -29,11 +29,11 @@ export class ArticleService {
     return JSON.parse(str);
   }
 
-  refresh() {
+  async refresh() {
     this.articles = this.getArticles();
   }
 
-  remove(selectedArticles: Set<Article>) {
+  async remove(selectedArticles: Set<Article>) {
     this.articles = this.articles.filter((a) => !selectedArticles.has(a));
     this.save();
   }
