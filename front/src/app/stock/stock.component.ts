@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
+import {
+  faPlus,
+  faRotateRight,
+  faTrashCan,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-stock',
@@ -8,6 +13,9 @@ import { ArticleService } from '../services/article.service';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnInit {
+  faRotateRight = faRotateRight;
+  faPlus = faPlus;
+  faTrashCan = faTrashCan;
   selectedArticles = new Set<Article>();
 
   constructor(public articleService: ArticleService) {
@@ -21,6 +29,12 @@ export class StockComponent implements OnInit {
     this.articleService.refresh();
   }
 
+  remove() {
+    console.log('remove');
+    this.articleService.remove(this.selectedArticles);
+    this.selectedArticles.clear();
+  }
+
   toggle(a: Article) {
     console.log('toggle');
     if (this.selectedArticles.has(a)) {
@@ -28,11 +42,5 @@ export class StockComponent implements OnInit {
       return;
     }
     this.selectedArticles.add(a);
-  }
-
-  remove() {
-    console.log('remove');
-    this.articleService.remove(this.selectedArticles);
-    this.selectedArticles.clear();
   }
 }

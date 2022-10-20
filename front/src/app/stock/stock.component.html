@@ -2,10 +2,18 @@
   <h1>Liste des articles</h1>
   <div class="content">
     <nav>
-      <button (click)="refresh()">Rafraîchir</button>
-      <button routerLink="create">Ajouter</button>
-      <button [hidden]="selectedArticles.size === 0" (click)="remove()">
-        Supprimer
+      <button (click)="refresh()" title="Rafraîchir">
+        <fa-icon [icon]="faRotateRight"></fa-icon>
+      </button>
+      <button routerLink="create" title="Ajouter">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+      <button
+        [hidden]="selectedArticles.size === 0"
+        (click)="remove()"
+        title="Supprimer"
+      >
+        <fa-icon [icon]="faTrashCan"></fa-icon>
       </button>
     </nav>
     <table>
