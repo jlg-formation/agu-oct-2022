@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Article } from '../interfaces/article';
 
 const ARTICLES_KEY = 'articles';
@@ -7,38 +8,34 @@ const ARTICLES_KEY = 'articles';
   providedIn: 'root',
 })
 export class ArticleService {
-  articles: Article[] = this.getArticles();
+  articles$ = new BehaviorSubject(this.getArticles());
 
-  constructor() {}
+  constructor() {
+    this.articles$.subscribe((articles) => {
+      localStorage.setItem(ARTICLES_KEY, JSON.stringify(articles));
+    });
+  }
 
   async add(a: Article) {
-    this.articles.push(a);
-    this.save();
+    this.articles$.value.push(a);
+    this.articles$.next(this.articles$.value);
   }
 
   getArticles(): Article[] {
     const str = localStorage.getItem(ARTICLES_KEY);
     if (str === null) {
-      return [
-        { name: 'Tournevis', price: 2.56, qty: 10 },
-        { name: 'Marteau', price: 5, qty: 56 },
-        { name: 'Ciseaux', price: 2, qty: 100 },
-        { name: 'Pelle', price: 3.4, qty: 50 },
-      ];
+      return [];
     }
     return JSON.parse(str);
   }
 
   async refresh() {
-    this.articles = this.getArticles();
+    this.articles$.next(this.getArticles());
   }
 
   async remove(selectedArticles: Set<Article>) {
-    this.articles = this.articles.filter((a) => !selectedArticles.has(a));
-    this.save();
-  }
-
-  save() {
-    localStorage.setItem(ARTICLES_KEY, JSON.stringify(this.articles));
+    this.articles$.next(
+      this.articles$.value.filter((a) => !selectedArticles.has(a))
+    );
   }
 }
