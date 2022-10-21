@@ -26,6 +26,9 @@ const logMiddleware = (req: Request, res: Response, next: NextFunction) => {
 app.use(logMiddleware);
 
 app.use("/api", cors());
+app.use("/api", (req, res, next) => {
+  setTimeout(next, 1000);
+});
 
 app.get("/api/date", (req, res) => {
   res.json({ date: new Date() });

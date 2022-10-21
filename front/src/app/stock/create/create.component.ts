@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Article } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -10,6 +11,7 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
+  faPlus = faPlus;
   f = new FormGroup({
     name: new FormControl('Truc', [
       Validators.required,

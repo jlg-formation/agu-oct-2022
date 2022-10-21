@@ -1,5 +1,9 @@
 button {
   padding: 0.5em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
 
   border: 0.1em solid #eee;
   background-color: #eee;
