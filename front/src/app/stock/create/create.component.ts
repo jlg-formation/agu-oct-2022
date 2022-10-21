@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { Article } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -11,6 +11,8 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
+  isAdding = false;
+  faCircleNotch = faCircleNotch;
   faPlus = faPlus;
   f = new FormGroup({
     name: new FormControl('Truc', [
@@ -32,10 +34,14 @@ export class CreateComponent implements OnInit {
   async submit() {
     try {
       console.log('submit');
+      this.isAdding = true;
       await this.articleService.add(this.f.value as Article);
+      await this.articleService.refresh();
       this.router.navigate(['..'], { relativeTo: this.route });
     } catch (err) {
       console.log('err: ', err);
+    } finally {
+      this.isAdding = false;
     }
   }
 

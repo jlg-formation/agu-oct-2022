@@ -27,7 +27,7 @@ app.use(logMiddleware);
 
 app.use("/api", cors());
 app.use("/api", (req, res, next) => {
-  setTimeout(next, 1000);
+  setTimeout(next, 10);
 });
 
 app.get("/api/date", (req, res) => {

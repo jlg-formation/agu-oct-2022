@@ -13,7 +13,6 @@ export class HttpArticleService extends ArticleService {
   constructor(private http: HttpClient) {
     super();
     console.log('http service');
-    this.refresh();
   }
 
   override async refresh(): Promise<void> {
@@ -30,7 +29,6 @@ export class HttpArticleService extends ArticleService {
   }
 
   override async remove(selectedArticles: Set<Article>): Promise<void> {
-    await super.remove(selectedArticles);
     const ids = [...selectedArticles].map((a) => a.id);
     await lastValueFrom(
       this.http.delete<void>(url, {
@@ -40,5 +38,6 @@ export class HttpArticleService extends ArticleService {
         },
       })
     );
+    await super.remove(selectedArticles);
   }
 }

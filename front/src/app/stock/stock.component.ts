@@ -5,6 +5,7 @@ import {
   faPlus,
   faRotateRight,
   faTrashCan,
+  faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,28 +14,45 @@ import {
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnInit {
+  isRemoving = false;
+  isRefreshing = false;
   faRotateRight = faRotateRight;
+  faCircleNotch = faCircleNotch;
   faPlus = faPlus;
   faTrashCan = faTrashCan;
   selectedArticles = new Set<Article>();
 
   constructor(public articleService: ArticleService) {
     console.log('articleService: ', articleService);
-    this.refresh();
+    this.articleService.refresh();
   }
 
   ngOnInit(): void {}
 
   async refresh() {
     console.log('refresh');
-    await this.articleService.refresh();
+    try {
+      this.isRefreshing = true;
+      await this.articleService.refresh();
+    } catch (err) {
+      console.log('err: ', err);
+    } finally {
+      this.isRefreshing = false;
+    }
   }
 
   async remove() {
     console.log('remove');
-    await this.articleService.remove(this.selectedArticles);
-    this.selectedArticles.clear();
-    await this.refresh();
+    try {
+      this.isRemoving = true;
+      await this.articleService.remove(this.selectedArticles);
+      this.selectedArticles.clear();
+      await this.articleService.refresh();
+    } catch (err) {
+      console.log('err: ', err);
+    } finally {
+      this.isRemoving = false;
+    }
   }
 
   toggle(a: Article) {
